@@ -346,7 +346,7 @@ class Finance_Yahoo_Navigation(Selenium_Driver):
         for element in elements:
             if 'Average' in element.text:
                 try:
-                    return float(element.text.split()[1].replace('.', self.dp))
+                    return float(element.text.split()[3].replace('.', self.dp))
                 except:
                     return None
 

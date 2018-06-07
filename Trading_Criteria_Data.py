@@ -23,7 +23,7 @@ def get_ticker_data(ticker, open_webpage=True, verbose=True,
 
     # INTRODUCE TICKER
     results['ticker'] = ticker
-    results['DateTime'] = datetime.now()
+    results['DateTime'] = datetime.now().strftime("%m/%d/%y")
     fyn.select_ticker(ticker)
     if verbose:
         print("---------{}---------".format(ticker))
@@ -70,16 +70,16 @@ def get_ticker_data(ticker, open_webpage=True, verbose=True,
     results['one_month_close'] = fyn.get_ndays_quotes(
             ndays=30, click_historical_data_first=False)
     try:
-        results['five_y_trend'] = results['five_years_close'] / \
-               results['Price']
+        results['five_y_trend'] = results['Price'] / \
+               results['five_years_close']
     except:
         results['five_y_trend'] = None
     try:
-        results['one_y_trend'] = results['one_year_close'] / results['Price']
+        results['one_y_trend'] = results['Price'] / results['one_year_close']
     except:
         results['one_y_trend'] = None
     try:
-        results['one_m_trend'] = results['one_month_close'] / results['Price']
+        results['one_m_trend'] = results['Price'] / results['one_month_close']
     except:
         results['one_m_trend'] = None
     if verbose:
@@ -131,7 +131,7 @@ if __name__ == '__main__':
                              decimal_point=".")
     results = pd.DataFrame(data=result, index=[0])
     results.to_csv("results.csv", mode="a", sep=";", columns=columns,
-                   index=False, encoding='latin1', header=True)
+                   index=False, encoding='latin1', header=True, na_rep="")
     tickers_df = tickers_df.drop(tickers_df.index[0])
     for ticker in tickers_df['Tickers']:
         result = get_ticker_data(ticker, open_webpage=False)
