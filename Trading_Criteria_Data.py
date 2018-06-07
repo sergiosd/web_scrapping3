@@ -27,7 +27,7 @@ def get_ticker_data(ticker, open_webpage=True, verbose=True,
     fyn.select_ticker(ticker)
     if verbose:
         print("---------{}---------".format(ticker))
-        print("{}".format(results['DateTime'].strftime("%d %b, %Y  %H:%M")))
+        print("{}".format(results['DateTime']))
 
     # GET CURRENT PRICE AND COMPANY NAME
     results['Price'] = fyn.get_current_price(click_summary_tab_first=False)
