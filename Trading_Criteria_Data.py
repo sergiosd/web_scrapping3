@@ -30,7 +30,7 @@ def get_ticker_data(ticker, open_webpage=True, verbose=True,
         print("{}".format(results['DateTime']))
 
     # GET CURRENT PRICE AND COMPANY NAME
-    results['Price'] = fyn.get_current_price(click_summary_tab_first=False)
+    results['Price'] = fyn.get_current_price(click_summary_tab_first=True)
     results['Company'] = fyn.get_company_name(click_summary_tab_first=False)
     if verbose:
         print("Current price = {}".format(results['Price']))
